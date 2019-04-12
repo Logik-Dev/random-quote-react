@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
 import styled from "styled-components";
 import axios from 'axios';
+
 const GREEN = "#00796b";
 const API_ENDPOINT = "https://coordinated-face.glitch.me/api/quote/all";
 
 const Page = styled.div`
   min-height: 100vh;
+  width: 100%;
   background-color: ${GREEN};
 `
 
 const Wrapper = styled.div`
   margin: 0 auto;
   min-height: 100vh;
-  max-width: 900px;
+  min-width: 100%;
   color: #fff;
   display: grid;
   grid-template-rows: 100px 1fr 150px;
@@ -37,6 +40,7 @@ const Header = styled.header`
 
 const QuoteBox = styled.div`
   margin: 2rem auto;
+  max-width: 900px;
   display: ${props => props.isLoading ? "none" : "flex"};
   flex-direction: column;
   justify-content: center;
@@ -44,7 +48,7 @@ const QuoteBox = styled.div`
   grid-area: quote;
 `
 const Title = styled.h1`
-  padding-left: 1.5rem;
+  padding: 0 1.5rem;
   font-family: 'Times New Roman', Times, serif;
   text-shadow: 2px 2px 3px rgba(0,0,0,.3);
   align-self: center;
@@ -106,7 +110,7 @@ const Footer = styled.footer`
     font-style: italic;
   }
 `
-export default function App() {
+function App() {
     /// Définitions
     const [isLoading, setIsLoading] = useState(true);
     const [cantFetchData, setCantFetchData] = useState(false);
@@ -177,3 +181,6 @@ export default function App() {
       </Page>
     );
 }
+
+ReactDOM.render(<App />,
+  document.getElementById('root'));
